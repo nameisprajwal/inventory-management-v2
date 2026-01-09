@@ -2,78 +2,19 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
-<!--TODO : map to a CSV file instead of hardcode-->
+
+    <!-- Load sample inventory data from CSV on startup -->
     <changeSet id="20240101-2" author="prajwal">
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="1"/>
-            <column name="product_id" valueNumeric="1001"/>
-            <column name="product_name" value="Laptop"/>
-            <column name="quantity" valueNumeric="68"/>
-            <column name="expiry_date" valueDate="2026-06-25"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="2"/>
-            <column name="product_id" valueNumeric="1005"/>
-            <column name="product_name" value="Smartwatch"/>
-            <column name="quantity" valueNumeric="52"/>
-            <column name="expiry_date" valueDate="2026-05-30"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="3"/>
-            <column name="product_id" valueNumeric="1004"/>
-            <column name="product_name" value="Headphones"/>
-            <column name="quantity" valueNumeric="20"/>
-            <column name="expiry_date" valueDate="2026-08-12"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="4"/>
-            <column name="product_id" valueNumeric="1003"/>
-            <column name="product_name" value="Tablet"/>
-            <column name="quantity" valueNumeric="35"/>
-            <column name="expiry_date" valueDate="2026-09-03"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="5"/>
-            <column name="product_id" valueNumeric="1005"/>
-            <column name="product_name" value="Smartwatch"/>
-            <column name="quantity" valueNumeric="39"/>
-            <column name="expiry_date" valueDate="2026-03-31"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="6"/>
-            <column name="product_id" valueNumeric="1004"/>
-            <column name="product_name" value="Headphones"/>
-            <column name="quantity" valueNumeric="56"/>
-            <column name="expiry_date" valueDate="2026-06-06"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="7"/>
-            <column name="product_id" valueNumeric="1005"/>
-            <column name="product_name" value="Smartwatch"/>
-            <column name="quantity" valueNumeric="40"/>
-            <column name="expiry_date" valueDate="2026-04-24"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="8"/>
-            <column name="product_id" valueNumeric="1003"/>
-            <column name="product_name" value="Tablet"/>
-            <column name="quantity" valueNumeric="21"/>
-            <column name="expiry_date" valueDate="2026-09-09"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="9"/>
-            <column name="product_id" valueNumeric="1002"/>
-            <column name="product_name" value="Smartphone"/>
-            <column name="quantity" valueNumeric="29"/>
-            <column name="expiry_date" valueDate="2026-05-31"/>
-        </insert>
-        <insert tableName="product_batches">
-            <column name="batch_id" valueNumeric="10"/>
-            <column name="product_id" valueNumeric="1002"/>
-            <column name="product_name" value="Smartphone"/>
-            <column name="quantity" valueNumeric="83"/>
-            <column name="expiry_date" valueDate="2026-11-15"/>
-        </insert>
+        <loadData
+                file="classpath:db/changelog/product-batches-data.csv"
+                tableName="product_batches"
+                separator=",">
+            <column name="batch_id" type="NUMERIC"/>
+            <column name="product_id" type="NUMERIC"/>
+            <column name="product_name" type="STRING"/>
+            <column name="quantity" type="NUMERIC"/>
+            <column name="expiry_date" type="DATE"/>
+        </loadData>
     </changeSet>
 
 </databaseChangeLog>
